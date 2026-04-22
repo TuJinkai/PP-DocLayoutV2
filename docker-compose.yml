@@ -13,8 +13,8 @@ services:
       # 挂载本地模型目录（可选，避免每次重建时下载）
       - ./PP-DocLayoutV2:/app/PP-DocLayoutV2:ro
     environment:
-      - VL_REC_SERVER_URL=${VL_REC_SERVER_URL:-http://10.9.42.175:3000/v1}
-      - VL_REC_API_KEY=${VL_REC_API_KEY:-sk-r3zC3KPb2M3NVMaduSrsjBdppFVWIqwEe6qH0QqOM6HgQ7eY}
+      - VL_REC_SERVER_URL=${VL_REC_SERVER_URL}
+      - VL_REC_API_KEY=${VL_REC_API_KEY}
       - VL_REC_API_MODEL_NAME=${VL_REC_API_MODEL_NAME:-PaddleOCR-VL-0.9B}
       - PORT=5001
     restart: unless-stopped

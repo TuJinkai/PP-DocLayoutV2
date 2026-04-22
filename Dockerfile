@@ -47,11 +47,8 @@ COPY api.py .
 # Copy model files
 COPY PP-DocLayoutV2 /app/PP-DocLayoutV2
 
-# Environment variables
+# Environment variables (defaults only, override at runtime)
 ENV DOCLAYOUT_MODEL_DIR=/app/PP-DocLayoutV2
-ENV VL_REC_SERVER_URL=http://10.9.42.175:3000/v1
-ENV VL_REC_API_KEY=sk-r3zC3KPb2M3NVMaduSrsjBdppFVWIqwEe6qH0QqOM6HgQ7eY
-ENV VL_REC_API_MODEL_NAME=PaddleOCR-VL-0.9B
 ENV PORT=5001
 
 # Expose port
