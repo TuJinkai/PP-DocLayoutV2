@@ -42,8 +42,8 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY api.py .
 
-# Create model directory
-RUN mkdir -p /app/PP-DocLayoutV2
+# Copy model files (downloaded during CI build or locally)
+COPY PP-DocLayoutV2 /app/PP-DocLayoutV2
 
 # Environment variables
 ENV DOCLAYOUT_MODEL_DIR=/app/PP-DocLayoutV2
