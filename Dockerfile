@@ -1,5 +1,5 @@
 # ARM-compatible Dockerfile for PaddleOCR-VL API
-# Multi-stage build for smaller final image
+# Supports both x86 and ARM64 (Kunpeng)
 
 FROM python:3.10-slim AS builder
 
@@ -22,15 +22,17 @@ RUN pip install --no-cache-dir --upgrade pip && \
 FROM python:3.10-slim
 
 # Install runtime dependencies for OpenCV and image processing
+# Use compatible package names for both x86 and ARM64
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
-    libgl1-mesa-glx \
-    libjpeg-dev \
-    libpng-dev \
+    libxrender1 \
+    libgl1 \
+    libjpeg62-turbo \
+    libpng16-16 \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -42,7 +44,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY api.py .
 
-# Copy model files (downloaded during CI build or locally)
+# Copy model files
 COPY PP-DocLayoutV2 /app/PP-DocLayoutV2
 
 # Environment variables
