@@ -53,9 +53,9 @@ curl -X POST http://localhost:5001/ocr \
 
 ### 前置条件
 
-1. 在 GitHub 仓库 Settings -> Secrets 中添加：
-   - `DOCKER_USERNAME`: Docker Hub 用户名
-   - `DOCKER_PASSWORD`: Docker Hub 密码或 Access Token
+1. 在 GitHub 仓库 **Settings** -> **Actions** -> **General**：
+   - Workflow permissions: 选择 **Read and write permissions**
+   - 保存即可（ghcr.io 使用 GITHUB_TOKEN 自动授权）
 
 2. 修改 `.github/workflows/build-arm.yml`（已预配置为 `tujinkai/paddleocr-vl-api`）
 
@@ -74,8 +74,8 @@ env:
 ### 在鲲鹏 ARM 上运行
 
 ```bash
-# 拉取镜像
-docker pull acckuss/paddleocr-vl-api:latest
+# 拉取镜像 (GitHub Container Registry)
+docker pull ghcr.io/tujinkai/pp-doclayoutv2:latest
 
 # 运行容器
 docker run -d \
@@ -83,7 +83,7 @@ docker run -d \
   -p 5001:5001 \
   -e VL_REC_SERVER_URL=http://your-vllm-server:3000/v1 \
   -e VL_REC_API_KEY=your-api-key \
-  acckuss/paddleocr-vl-api:latest
+  ghcr.io/tujinkai/pp-doclayoutv2:latest
 ```
 
 ## 环境变量配置
