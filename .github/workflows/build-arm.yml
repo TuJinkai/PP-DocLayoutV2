@@ -24,7 +24,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: tujinkai/paddleocr-vl-api
+  IMAGE_NAME: acckuss/paddleocr-vl-api
   MODEL_DIR: PP-DocLayoutV2
 
 jobs:

@@ -75,7 +75,7 @@ env:
 
 ```bash
 # 拉取镜像
-docker pull tujinkai/paddleocr-vl-api:latest
+docker pull acckuss/paddleocr-vl-api:latest
 
 # 运行容器
 docker run -d \
@@ -83,7 +83,7 @@ docker run -d \
   -p 5001:5001 \
   -e VL_REC_SERVER_URL=http://your-vllm-server:3000/v1 \
   -e VL_REC_API_KEY=your-api-key \
-  tujinkai/paddleocr-vl-api:latest
+  acckuss/paddleocr-vl-api:latest
 ```
 
 ## 环境变量配置
