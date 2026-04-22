@@ -1,0 +1,4 @@
+flask>=2.0.0
+werkzeug>=2.0.0
+paddlepaddle>=2.6.0
+paddleocr>=2.8.0
