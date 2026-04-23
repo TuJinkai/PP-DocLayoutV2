@@ -44,11 +44,9 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY api.py .
 
-# Copy model files
-COPY PP-DocLayoutV2 /app/PP-DocLayoutV2
 
 # Environment variables (defaults only, override at runtime)
-ENV DOCLAYOUT_MODEL_DIR=/app/PP-DocLayoutV2
+ENV DOCLAYOUT_MODEL_DIR=/app/models/PP-DocLayoutV2
 ENV PORT=5001
 
 # Expose port
