@@ -44,10 +44,12 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application code
 COPY api.py .
 
-
 # Environment variables (defaults only, override at runtime)
 ENV DOCLAYOUT_MODEL_DIR=/app/models/PP-DocLayoutV2
 ENV PORT=5001
+ENV WORKERS=2
+ENV THREADS=4
+ENV PYTHONPATH=/app
 
 # Expose port
 EXPOSE 5001
@@ -56,5 +58,5 @@ EXPOSE 5001
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:5001/health || exit 1
 
-# Run the application
-CMD ["python", "api.py"]
+# Run the application with Gunicorn WSGI server
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT} --workers ${WORKERS} --threads ${THREADS} --timeout 300 --access-logfile - --error-logfile - api:app"]
