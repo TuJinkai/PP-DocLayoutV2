@@ -23,8 +23,8 @@ on:
         type: boolean
 
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  REGISTRY: docker.io
+  IMAGE_NAME: acckuss/paddleocr-vl-api
   MODEL_DIR: PP-DocLayoutV2
 
 jobs:
@@ -61,30 +61,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Download PP-DocLayoutV2 model
-        run: |
-          pip install modelscope
-          python -c "
-          from modelscope import snapshot_download
-          import os
-          import shutil
-
-          downloaded_path = snapshot_download(
-              'PaddlePaddle/PP-DocLayoutV2',
-              cache_dir='./model_cache',
-              revision='master'
-          )
-          target_dir = '${{ env.MODEL_DIR }}'
-          if os.path.exists(target_dir):
-              shutil.rmtree(target_dir)
-          shutil.copytree(downloaded_path, target_dir)
-          print(f'Model ready at: {target_dir}')
-          print('Files:', os.listdir(target_dir))
-          "
-
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push Docker image for ARM64
         uses: docker/build-push-action@v5
         with:
