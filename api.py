@@ -17,7 +17,7 @@ from paddleocr import PaddleOCRVL
 app = Flask(__name__)
 
 # 配置 (支持环境变量覆盖)
-VL_REC_SERVER_URL = os.environ.get("VL_REC_SERVER_URL", "http://10.9.42.175:3000/v1")
+VL_REC_SERVER_URL = os.environ.get("VL_REC_SERVER_URL", "http://10.11.163.100:16101/v1")
 VL_REC_API_KEY = os.environ.get("VL_REC_API_KEY", "sk-r3zC3KPb2M3NVMaduSrsjBdppFVWIqwEe6qH0QqOM6HgQ7eY")
 VL_REC_API_MODEL_NAME = os.environ.get("VL_REC_API_MODEL_NAME", "PaddleOCR-VL-0.9B")
 DOCLAYOUT_MODEL_DIR = os.environ.get("DOCLAYOUT_MODEL_DIR", "./PP-DocLayoutV2")
